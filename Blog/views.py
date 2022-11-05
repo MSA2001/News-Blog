@@ -17,3 +17,6 @@ def cat_tech(request):
 
 def cat_travel(request):
     return render(request, 'Blog/travel.html')
+
+def contact(request):
+    return render(request, 'Blog/contact.html')
