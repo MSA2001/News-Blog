@@ -170,7 +170,7 @@
                     <div class="d-flex flex-wrap">
                         <div class="posts-thumb align-self-stretch">
                             <a href="#">
-                               <img src="{{ article.image.url }}" width="250px" height="250px">
+                               <img src="{{ article.image.url }}" width="100%" height="100%">
                             </a>
                         </div>
 
@@ -217,58 +217,22 @@
 
                     <section class="widget wiget_posts_thumbs">
                         <h3 class="widget-title">پست های اخیر</h3>
-
+                    {% for article in recent_article|slice:":5" %}
                         <article>
                             <a href="#" class="thumb">
-                                <span class="fullimage thumb-bg1"></span>
+                                <img src="{{ article.image.url }}" height="70px" width="70px">
                             </a>
 
                             <div class="info">
-                                <time datetime="2019-05-11">11 دی 1398</time>
+                                <time datetime="2019-05-11">{{ article.created }}</time>
                                 <h4 class="title">
-                                    <a href="#">لورم ایپسوم متن ساختگی با تولید نامفهوم است.</a>
+                                    <a href="#">{{ article.title }}</a>
                                 </h4>
                             </div>
                         </article>
+                        {% endfor %}
 
-                        <article>
-                            <a href="#" class="thumb">
-                                <span class="fullimage thumb-bg2"></span>
-                            </a>
 
-                            <div class="info">
-                                <time datetime="2019-05-11">11 دی 1398</time>
-                                <h4 class="title">
-                                    <a href="#">لورم ایپسوم متن ساختگی با تولید نامفهوم است.</a>
-                                </h4>
-                            </div>
-                        </article>
-
-                        <article>
-                            <a href="#" class="thumb">
-                                <span class="fullimage thumb-bg3"></span>
-                            </a>
-
-                            <div class="info">
-                                <time datetime="2019-05-11">11 دی 1398</time>
-                                <h4 class="title">
-                                    <a href="#">لورم ایپسوم متن ساختگی با تولید نامفهوم است.</a>
-                                </h4>
-                            </div>
-                        </article>
-
-                        <article>
-                            <a href="#" class="thumb">
-                                <span class="fullimage thumb-bg4"></span>
-                            </a>
-
-                            <div class="info">
-                                <time datetime="2019-05-11">11 دی 1398</time>
-                                <h4 class="title">
-                                    <a href="#">لورم ایپسوم متن ساختگی با تولید نامفهوم است.</a>
-                                </h4>
-                            </div>
-                        </article>
                     </section>
 
                     <section class="widget widget_categories">
