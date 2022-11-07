@@ -2,13 +2,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
+from .models import Article
 
 
 # Create your views here.
 
 
 def home(request):
-    return render(request, 'Blog/index-7.html')
+    articles = Article.objects.all()
+    return render(request, 'Blog/index-7.html', {'articles': articles})
+
 
 
 def cat_lifestyle(request):
@@ -59,10 +62,11 @@ def register(request):
         if User.objects.filter(email=email).exists():
             messages.error(request, 'این ایمیل از قبل وجود دارد')
             return render(request, 'Blog/signup.html')
-        user = User.objects.create(username=username, email=email, password=password1)
+
         if password1 != password2:
             messages.error(request, 'پسورد شما تطابق ندارد')
             return render(request, 'Blog/signup.html')
+        user = User.objects.create(username=username, email=email, password=password1)
         login(request, user)
         return redirect('blog:home')
     return render(request, 'Blog/signup.html')
