@@ -9,7 +9,7 @@ from .models import Article
 
 
 def home(request):
-    articles = Article.objects.all()
+    articles = Article.objects.all().order_by('?')
     return render(request, 'Blog/index-7.html', {'articles': articles})
 
 
