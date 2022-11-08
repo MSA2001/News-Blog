@@ -145,7 +145,7 @@
                     <a href="#"><img src="{{ article.image.url }}" height="650px" width="650px" alt="img"></a>
                 </div>
                 <div class="blog-post-content">
-                    <div class="tags"><a href="#">{{ article.category.title }}</a></div>
+                    <div class="tags"><a href="#">{{ article.category.all.first }}</a></div>
                     <h3><a href="#">{{ article.title }}</a></h3>
 
                     <ul>
@@ -176,7 +176,7 @@
 
                         <div class="posts-content">
                             <div class="cat">
-                                <a href="#">{{ article.category.title }}</a>
+                                <a href="#">{{ article.category.all.first }}</a>
                             </div>
 
                             <h3 class="title"><a href="#">{{ article.title }}</a></h3>
@@ -239,11 +239,9 @@
                         <h3 class="widget-title">دسته بندی ها</h3>
 
                         <ul>
-                            <li><a href="#">شبکه</a></li>
-                            <li><a href="#">اجتماعی</a></li>
-                            <li><a href="#">تکنولوژی</a></li>
-                            <li><a href="#">نکته</a></li>
-                            <li><a href="#">دسته بندی نشده</a></li>
+                            {% for category in cat %}
+                            <li><a href="#">{{ category.title}}</a></li>
+                           {% endfor %}
                         </ul>
                     </section>
 
