@@ -17,17 +17,19 @@ def home(request):
     return render(request, 'Blog/index-7.html', {'articles': articles, 'recent_article': recent, 'category': category, 'cat' : cat })
 
 
-
 def cat_lifestyle(request):
-    return render(request, 'Blog/lifestyle.html')
+    article_lifestyle = Article.objects.filter(category=1)
+    return render(request, 'Blog/lifestyle.html', {'articles': article_lifestyle})
 
 
 def cat_tech(request):
-    return render(request, 'Blog/tech.html')
+    article_technology = Article.objects.filter(category=2)
+    return render(request, 'Blog/tech.html', {'articles': article_technology})
 
 
 def cat_travel(request):
-    return render(request, 'Blog/travel.html')
+    article_travel = Article.objects.filter(category=3)
+    return render(request, 'Blog/travel.html', {'articles': article_travel})
 
 
 def contact(request):
