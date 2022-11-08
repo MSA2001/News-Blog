@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Article
+from .models import Article, Category
 
 
 # Create your views here.
@@ -11,7 +11,10 @@ from .models import Article
 def home(request):
     articles = Article.objects.all().order_by('?')
     recent = Article.objects.all().order_by('-updated')
-    return render(request, 'Blog/index-7.html', {'articles': articles, 'recent_article':recent})
+    cat = Category.objects.all()
+    for article in articles:
+        category = article.category.all()
+    return render(request, 'Blog/index-7.html', {'articles': articles, 'recent_article': recent, 'category': category, 'cat' : cat })
 
 
 
@@ -32,7 +35,7 @@ def contact(request):
 
 
 def signin(request):
-    if request.user.is_authenticated == True:
+    if request.user.is_authenticated:
         return redirect('blog:home')
 
     if request.method == 'POST':
