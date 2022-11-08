@@ -144,7 +144,7 @@
             <h2>فناوری</h2>
 
             <ul>
-                <li><a href="#"><i class="icofont-home"></i> صفحه اصلی</a></li>
+                <li><a href="{% url 'blog:home' %}"><i class="icofont-home"></i> صفحه اصلی</a></li>
                 <li><i class="icofont-rounded-left"></i></li>
                 <li>فناوری</li>
             </ul>
@@ -158,77 +158,26 @@
     <div class="container">
         <div class="row">
             <div class="default-news-slides owl-carousel owl-theme">
+                {% for article in articles %}
                 <div class="col-lg-12 col-md-12">
                     <div class="single-default-news">
-                        <img src="{% static 'assets/img/1.jpg' %}" alt="image">
+                        <img src="{{ article.image.url }}" alt="image" height="300px" width="500px">
 
                         <div class="news-content">
                             <ul>
-                                <li><i class="icofont-user-suited"></i> توسط <a href="#">جان اسمیت</a></li>
-                                <li><i class="icofont-calendar"></i> 22 دی 1398</li>
+                                <li><i class="icofont-user-suited"></i> توسط <a href="#">{{ article.author.username }}</a></li>
+                                <li><i class="icofont-calendar"></i>{{ article.created }}</li>
                             </ul>
-                            <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.</a></h3>
+                            <h3><a href="#">{{ article.title }}</a></h3>
                         </div>
 
                         <div class="tags">
-                            <a href="#">ورزش</a>
+                            <a href="#">{{ article.category.all.first }}</a>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
 
-                <div class="col-lg-12 col-md-12">
-                    <div class="single-default-news">
-                        <img src="{% static 'assets/img/2.jpg' %}" alt="image">
-
-                        <div class="news-content">
-                            <ul>
-                                <li><i class="icofont-user-suited"></i> توسط <a href="#">جان اسمیت</a></li>
-                                <li><i class="icofont-calendar"></i> 22 دی 1398</li>
-                            </ul>
-                            <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.</a></h3>
-                        </div>
-
-                        <div class="tags bg-2">
-                            <a href="#">ورزش</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-12 col-md-12">
-                    <div class="single-default-news">
-                        <img src="{% static 'assets/img/3.jpg' %}" alt="image">
-
-                        <div class="news-content">
-                            <ul>
-                                <li><i class="icofont-user-suited"></i> توسط <a href="#">جان اسمیت</a></li>
-                                <li><i class="icofont-calendar"></i> 22 دی 1398</li>
-                            </ul>
-                            <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.</a></h3>
-                        </div>
-
-                        <div class="tags bg-3">
-                            <a href="#">ورزش</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-12 col-md-12">
-                    <div class="single-default-news">
-                        <img src="{% static 'assets/img/4.jpg' %}" alt="image">
-
-                        <div class="news-content">
-                            <ul>
-                                <li><i class="icofont-user-suited"></i> توسط <a href="#">جان اسمیت</a></li>
-                                <li><i class="icofont-calendar"></i> 22 دی 1398</li>
-                            </ul>
-                            <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.</a></h3>
-                        </div>
-
-                        <div class="tags bg-4">
-                            <a href="#">ورزش</a>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -244,197 +193,29 @@
                     <h2>همه اخبار</h2>
                 </div>
 
+                {% for article in articles %}
                 <div class="single-category-news">
                     <div class="row m-0 align-items-center">
                         <div class="col-lg-5 col-md-6 p-0">
                             <div class="category-news-image">
-                                <a href="#"><img src="{% static 'assets/img/1.jpg' %}" alt="image"></a>
+                                <a href="#"><img src="{{ article.image.url }}" alt="image"></a>
 
                                 <div class="tags">
-                                    <a href="#">ورزش</a>
+                                    <a href="#">{{ article.category.all.first }}</a>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-lg-7 col-md-6">
                             <div class="category-news-content">
-                                <span><i class="icofont-clock-time"></i> در 10 دقیقه پیش</span>
-                                <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد</a></h3>
-                                <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال
-                                    استاندارد صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.
-                                    لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
+                                <span><i class="icofont-clock-time"></i>{{ article.created }}</span>
+                                <h3><a href="#">{{ article.title }}</a></h3>
+                                <p>{{ article.body|truncatewords:30  }}</p>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div class="single-category-news">
-                    <div class="row m-0 align-items-center">
-                        <div class="col-lg-5 col-md-6 p-0">
-                            <div class="category-news-image">
-                                <a href="#"><img src="{% static 'assets/img/6.jpg' %}" alt="image"></a>
-
-                                <div class="tags bg-2">
-                                    <a href="#">ورزش</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-7 col-md-6">
-                            <div class="category-news-content">
-                                <span><i class="icofont-clock-time"></i> در 10 دقیقه پیش</span>
-                                <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد</a></h3>
-                                <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال
-                                    استاندارد صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.
-                                    لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-category-news">
-                    <div class="row m-0 align-items-center">
-                        <div class="col-lg-5 col-md-6 p-0">
-                            <div class="category-news-image">
-                                <a href="#"><img src="{% static 'assets/img/5.jpg' %}" alt="image"></a>
-
-                                <div class="tags bg-3">
-                                    <a href="#">ورزش</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-7 col-md-6">
-                            <div class="category-news-content">
-                                <span><i class="icofont-clock-time"></i> در 10 دقیقه پیش</span>
-                                <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد</a></h3>
-                                <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال
-                                    استاندارد صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.
-                                    لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-category-news">
-                    <div class="row m-0 align-items-center">
-                        <div class="col-lg-5 col-md-6 p-0">
-                            <div class="category-news-image">
-                                <a href="#"><img src="{% static 'assets/img/4.jpg' %}" alt="image"></a>
-
-                                <div class="tags bg-4">
-                                    <a href="#">ورزش</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-7 col-md-6">
-                            <div class="category-news-content">
-                                <span><i class="icofont-clock-time"></i> در 10 دقیقه پیش</span>
-                                <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد</a></h3>
-                                <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال
-                                    استاندارد صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.
-                                    لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-category-news">
-                    <div class="row m-0 align-items-center">
-                        <div class="col-lg-5 col-md-6 p-0">
-                            <div class="category-news-image">
-                                <a href="#"><img src="{% static 'assets/img/3.jpg' %}" alt="image"></a>
-
-                                <div class="tags bg-5">
-                                    <a href="#">ورزش</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-7 col-md-6">
-                            <div class="category-news-content">
-                                <span><i class="icofont-clock-time"></i> در 10 دقیقه پیش</span>
-                                <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد</a></h3>
-                                <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال
-                                    استاندارد صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.
-                                    لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-category-news">
-                    <div class="row m-0 align-items-center">
-                        <div class="col-lg-5 col-md-6 p-0">
-                            <div class="category-news-image">
-                                <a href="#"><img src="{% static 'assets/img/2.jpg' %}" alt="image"></a>
-
-                                <div class="tags">
-                                    <a href="#">ورزش</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-7 col-md-6">
-                            <div class="category-news-content">
-                                <span><i class="icofont-clock-time"></i> در 10 دقیقه پیش</span>
-                                <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد</a></h3>
-                                <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال
-                                    استاندارد صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.
-                                    لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-category-news">
-                    <div class="row m-0 align-items-center">
-                        <div class="col-lg-5 col-md-6 p-0">
-                            <div class="category-news-image">
-                                <a href="#"><img src="{% static 'assets/img/1.jpg' %}" alt="image"></a>
-
-                                <div class="tags bg-3">
-                                    <a href="#">ورزش</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-7 col-md-6">
-                            <div class="category-news-content">
-                                <span><i class="icofont-clock-time"></i> در 10 دقیقه پیش</span>
-                                <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد</a></h3>
-                                <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال
-                                    استاندارد صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.
-                                    لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="single-category-news">
-                    <div class="row m-0 align-items-center">
-                        <div class="col-lg-5 col-md-6 p-0">
-                            <div class="category-news-image">
-                                <a href="#"><img src="{% static 'assets/img/3.jpg' %}" alt="image"></a>
-
-                                <div class="tags bg-5">
-                                    <a href="#">ورزش</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-7 col-md-6">
-                            <div class="category-news-content">
-                                <span><i class="icofont-clock-time"></i> در 10 دقیقه پیش</span>
-                                <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد</a></h3>
-                                <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال
-                                    استاندارد صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد.
-                                    لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {% endfor %}
 
                 <div class="pagination-area">
                     <a href="#" class="prev page-numbers"><i class="icofont-double-right"></i></a>
@@ -447,62 +228,7 @@
 
             <div class="col-lg-4 col-md-12">
 
-                <div class="featured-news">
-                    <div class="section-title">
-                        <h2>اخبار مهم</h2>
-                    </div>
 
-                    <div class="single-featured-news">
-                        <img src="{% static 'assets/img/1.jpg' %}" alt="image">
-
-                        <div class="news-content">
-                            <ul>
-                                <li><i class="icofont-user-suited"></i> توسط <a href="#">جان اسمیت</a></li>
-                                <li><i class="icofont-calendar"></i> 22 دی 1398</li>
-                            </ul>
-                            <h3><a href="#">کریستین اندلر در کنار متوقف کردن اهداف ، درهای خود را در خانه باز می کند</a>
-                            </h3>
-                        </div>
-
-                        <div class="tags">
-                            <a href="#">ورزش</a>
-                        </div>
-                    </div>
-
-                    <div class="single-featured-news">
-                        <img src="{% static 'assets/img/2.jpg' %}" alt="image">
-
-                        <div class="news-content">
-                            <ul>
-                                <li><i class="icofont-user-suited"></i> توسط <a href="#">جان اسمیت</a></li>
-                                <li><i class="icofont-calendar"></i> 22 دی 1398</li>
-                            </ul>
-                            <h3><a href="#">کریستین اندلر در کنار متوقف کردن اهداف ، درهای خود را در خانه باز می کند</a>
-                            </h3>
-                        </div>
-
-                        <div class="tags bg-2">
-                            <a href="#">ورزش</a>
-                        </div>
-                    </div>
-
-                    <div class="single-featured-news">
-                        <img src="{% static 'assets/img/3.jpg' %}" alt="image">
-
-                        <div class="news-content">
-                            <ul>
-                                <li><i class="icofont-user-suited"></i> توسط <a href="#">جان اسمیت</a></li>
-                                <li><i class="icofont-calendar"></i> 22 دی 1398</li>
-                            </ul>
-                            <h3><a href="#">کریستین اندلر در کنار متوقف کردن اهداف ، درهای خود را در خانه باز می کند</a>
-                            </h3>
-                        </div>
-
-                        <div class="tags bg-3">
-                            <a href="#">ورزش</a>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="newsletter-box">
                     <div class="section-title">
