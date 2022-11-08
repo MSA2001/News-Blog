@@ -31,14 +31,13 @@
 
     <title>Sinmun - قالب HTML سینون , پوسته چندمنظوره سایت اخبار و مجله خبری</title>
 
-    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png"' %}>
+    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
     </head>
 
     <body>
         
         <!-- Start Header Area -->
-        <header class=" header-area
-    ">
+        <header class="header-area">
     <!-- Start Top Header -->
 
 
@@ -107,6 +106,7 @@
                                 </ul>
                             </div>
                         </div>
+                    </div>
                 </nav>
             </div>
         </div>
@@ -154,8 +154,18 @@
                 <div class="col-lg-8 col-md-12">
                     <div class="contact-form">
                         <h3>تماس با ما</h3>
+                         {% if messages %}
 
-                        <form id="contactForm">
+                    {% for message in messages %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                {% endif %}
+
+                        <form method="post">
+                            {% csrf_token %}
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
@@ -191,7 +201,7 @@
                                 </div>
 
                                 <div class="col-lg-12">
-                                    <button type="submit" class="btn btn-primary">ارسال پیام</button>
+                                    <button class="btn btn-primary">ارسال پیام</button>
                                     <div id="msgSubmit" class="h3 text-center hidden"></div>
                                     <div class="clearfix"></div>
                                 </div>

@@ -28,3 +28,11 @@ class Article(models.Model):
         return self.title
 
 
+class Message(models.Model):
+    name = models.CharField(max_length=30)
+    email = models.EmailField(max_length=50)
+    title = models.CharField(max_length=85)
+    body = models.TextField(max_length=750)
+
+    def __str__(self):
+        return self.title

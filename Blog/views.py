@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Article, Category
+from .models import Article, Category, Message
 
 
 # Create your views here.
@@ -33,6 +33,14 @@ def cat_travel(request):
 
 
 def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        title = request.POST.get('msg_subject')
+        body = request.POST.get('message')
+        Message.objects.create(name=name, email=email, title=title, body=body)
+        messages.success(request, 'پیام شما با موفقیت ارسال شد')
+        return render(request, 'Blog/contact.html')
     return render(request, 'Blog/contact.html')
 
 
