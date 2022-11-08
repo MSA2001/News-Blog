@@ -36,3 +36,10 @@ class Message(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class Newsletter(models.Model):
+    email = models.EmailField(max_length=35)
+
+    def __str__(self):
+        return self.email
