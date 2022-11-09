@@ -25,13 +25,14 @@ def home(request):
             return redirect('blog:home')
     return render(request, 'Blog/index-7.html', {'articles': articles, 'recent_article': recent, 'category': category, 'cat': cat})
 
-def detail(request):
-    return render(request, 'Blog/detail.html')
+
+def detail(request, id):
+    article = Article.objects.get(id=id)
+    return render(request, 'Blog/detail.html', {'article': article})
 
 
 def cat_lifestyle(request):
     article_lifestyle = Article.objects.filter(category=1)
-
     if request.method == 'POST':
         email = request.POST.get('email')
         if Newsletter.objects.filter(email=email).exists():
@@ -60,7 +61,7 @@ def cat_tech(request):
 
 def cat_travel(request):
     article_travel = Article.objects.filter(category=3)
-    if request.method == 'POST':
+    if request.method =='POST':
         email = request.POST.get('email')
         if Newsletter.objects.filter(email=email).exists():
             messages.error(request, 'شما قبلا عضو شده اید')

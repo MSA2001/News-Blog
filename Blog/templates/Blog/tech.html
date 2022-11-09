@@ -161,14 +161,15 @@
                 {% for article in articles %}
                 <div class="col-lg-12 col-md-12">
                     <div class="single-default-news">
+                        <a href="{% url 'blog:posts'  article.id   %}">
                         <img src="{{ article.image.url }}" alt="image" height="300px" width="500px">
-
+                        </a>
                         <div class="news-content">
                             <ul>
                                 <li><i class="icofont-user-suited"></i> توسط <a href="#">{{ article.author.username }}</a></li>
                                 <li><i class="icofont-calendar"></i>{{ article.created }}</li>
                             </ul>
-                            <h3><a href="#">{{ article.title }}</a></h3>
+                            <h3><a href="{% url 'blog:posts'  article.id   %}">{{ article.title }}</a></h3>
                         </div>
 
                         <div class="tags">
@@ -198,8 +199,7 @@
                     <div class="row m-0 align-items-center">
                         <div class="col-lg-5 col-md-6 p-0">
                             <div class="category-news-image">
-                                <a href="#"><img src="{{ article.image.url }}" alt="image"></a>
-
+                                <a href="{% url 'blog:posts'  article.id   %}"><img src="{{ article.image.url }}" alt="image"></a>
                                 <div class="tags">
                                     <a href="#">{{ article.category.all.first }}</a>
                                 </div>
@@ -209,7 +209,7 @@
                         <div class="col-lg-7 col-md-6">
                             <div class="category-news-content">
                                 <span><i class="icofont-clock-time"></i>{{ article.created }}</span>
-                                <h3><a href="#">{{ article.title }}</a></h3>
+                                <h3><a href="{% url 'blog:posts'  article.id   %}">{{ article.title }}</a></h3>
                                 <p>{{ article.body|truncatewords:30  }}</p>
                             </div>
                         </div>
