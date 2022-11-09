@@ -145,7 +145,7 @@
                     <a href="{% url 'blog:posts'  article.id   %}"><img src="{{ article.image.url }}" height="400px" width="650px" alt="img"></a>
                 </div>
                 <div class="blog-post-content">
-                    <div class="tags"><a href="#">{{ article.category.all.first }}</a></div>
+                    <div class="tags"> <a href="#"> {{ article.category.all.first }} </a></div>
                     <h3><a href="{% url 'blog:posts'  article.id   %}">{{ article.title }}</a></h3>
 
                     <ul>
@@ -176,7 +176,7 @@
 
                         <div class="posts-content">
                             <div class="cat">
-                                <a href="#">{{ article.category.all.first }}</a>
+                                {{ article.category.all.first }}
                             </div>
 
                             <h3 class="title"><a href="{% url 'blog:posts'  article.id   %}">{{ article.title }}</a></h3>
@@ -235,15 +235,7 @@
 
                     </section>
 
-                    <section class="widget widget_categories">
-                        <h3 class="widget-title">دسته بندی ها</h3>
 
-                        <ul>
-                            {% for category in cat %}
-                            <li><a href="#">{{ category.title}}</a></li>
-                           {% endfor %}
-                        </ul>
-                    </section>
                 <div class="newsletter-box">
                     <div class="section-title">
                         <h2>خبرنامه</h2>
