@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Article, Category, Message
+from .models import Article, Category, Message, Newsletter
 
 
 # Create your views here.
@@ -14,21 +14,58 @@ def home(request):
     cat = Category.objects.all()
     for article in articles:
         category = article.category.all()
-    return render(request, 'Blog/index-7.html', {'articles': articles, 'recent_article': recent, 'category': category, 'cat' : cat })
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if Newsletter.objects.filter(email=email).exists():
+            messages.error(request, 'شما قبلا عضو شده اید')
+            return redirect('blog:home')
+        else:
+            Newsletter.objects.create(email=email)
+            messages.success(request, 'عضویت شما تایید شد')
+            return redirect('blog:home')
+    return render(request, 'Blog/index-7.html', {'articles': articles, 'recent_article': recent, 'category': category, 'cat': cat})
 
 
 def cat_lifestyle(request):
     article_lifestyle = Article.objects.filter(category=1)
+
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if Newsletter.objects.filter(email=email).exists():
+            messages.error(request, 'شما قبلا عضو شده اید')
+            return redirect('blog:home')
+        else:
+            Newsletter.objects.create(email=email)
+            messages.success(request, 'عضویت شما تایید شد')
+            return redirect('blog:home')
     return render(request, 'Blog/lifestyle.html', {'articles': article_lifestyle})
 
 
 def cat_tech(request):
     article_technology = Article.objects.filter(category=2)
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if Newsletter.objects.filter(email=email).exists():
+            messages.error(request, 'شما قبلا عضو شده اید')
+            return redirect('blog:home')
+        else:
+            Newsletter.objects.create(email=email)
+            messages.success(request, 'عضویت شما تایید شد')
+            return redirect('blog:home')
     return render(request, 'Blog/tech.html', {'articles': article_technology})
 
 
 def cat_travel(request):
     article_travel = Article.objects.filter(category=3)
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if Newsletter.objects.filter(email=email).exists():
+            messages.error(request, 'شما قبلا عضو شده اید')
+            return redirect('blog:home')
+        else:
+            Newsletter.objects.create(email=email)
+            messages.success(request, 'عضویت شما تایید شد')
+            return redirect('blog:home')
     return render(request, 'Blog/travel.html', {'articles': article_travel})
 
 
@@ -89,3 +126,12 @@ def register(request):
 def user_logout(request):
     logout(request)
     return redirect('blog:home')
+
+
+def newsletter(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        Newsletter.objects.create(email=email)
+        messages.success(request, 'عضویت شما تایید شد')
+
+    return render(request, 'includes/newsletter.html')
