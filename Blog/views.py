@@ -25,6 +25,9 @@ def home(request):
             return redirect('blog:home')
     return render(request, 'Blog/index-7.html', {'articles': articles, 'recent_article': recent, 'category': category, 'cat': cat})
 
+def detail(request):
+    return render(request, 'Blog/detail.html')
+
 
 def cat_lifestyle(request):
     article_lifestyle = Article.objects.filter(category=1)
