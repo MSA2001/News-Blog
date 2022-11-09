@@ -174,7 +174,7 @@
                         </div>
 
                         <div class="tags">
-                            <a href="#">{{ article.category.all.first }}</a>
+                            <a href="{% url 'blog:cat_travel' %}">{{ article.category.all.first }}</a>
                         </div>
                     </div>
                 </div>
@@ -202,7 +202,7 @@
                                 <a href="{% url 'blog:posts'  article.id   %}"><img src="{{ article.image.url }}" alt="image"></a>
 
                                 <div class="tags">
-                                    <a href="#">{{ article.category.all.first }}</a>
+                                    <a href="{% url 'blog:cat_travel' %}">{{ article.category.all.first }}</a>
                                 </div>
                             </div>
                         </div>

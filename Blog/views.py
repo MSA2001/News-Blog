@@ -14,6 +14,7 @@ def home(request):
     cat = Category.objects.all()
     for article in articles:
         category = article.category.all()
+
     if request.method == 'POST':
         email = request.POST.get('email')
         if Newsletter.objects.filter(email=email).exists():
