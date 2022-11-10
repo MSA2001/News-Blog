@@ -6,10 +6,10 @@
                 <h6 class="breaking-title"><i class="icofont-flash"></i> خبر فوری:</h6>
 
                 <div class="breaking-news-slides owl-carousel owl-theme">
-                   {% for object in article %}
+                   {% for object in articles %}
                     <div class="single-breaking-news">
 
-                        <p><a href="#">
+                        <p><a href="{% url 'blog:posts' object.id %}">
                             {{ object.title }}  </a></p>
                     </div>
                     {% endfor %}
