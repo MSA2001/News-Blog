@@ -38,7 +38,12 @@ def detail(request, id):
 
 
 def search(request):
-    return render(request,'Blog/result.html')
+    q = request.GET.get('q')
+    articles = Article.objects.filter(title__icontains=q)
+    page_number = request.GET.get('page')
+    paginator = Paginator(articles, 2)
+    object_list = paginator.get_page(page_number)
+    return render(request,'Blog/result.html', {'articles': object_list})
 
 
 def cat_lifestyle(request):
