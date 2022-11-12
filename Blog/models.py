@@ -43,3 +43,13 @@ class Newsletter(models.Model):
 
     def __str__(self):
         return self.email
+
+
+class Info(models.Model):
+    body = models.CharField(max_length=200, null=True, blank=True)
+    location = models.CharField(max_length=200, null=True, blank=True)
+    number = models.IntegerField(max_length=20, null=True, blank=True)
+    email = models.EmailField(max_length=30, null=True, blank=True)
+    site = models.CharField(max_length=30, null=True, blank=True)
+
+

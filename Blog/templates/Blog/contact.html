@@ -189,14 +189,12 @@
                 <div class="col-lg-4 col-md-12">
                     <div class="contact-info">
                         <h3>تماس بگیرید</h3>
-                        <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال استاندارد
-                            صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40
-                            سال استاندارد صنعت بوده است.</p>
+                        <p>{{ info.body }}</p>
                         <ul>
-                            <li><i class="icofont-google-map"></i> کشور شما ، استان و شهر شما ، محله سکونت</li>
-                            <li><i class="icofont-phone"></i> <a href="#">021-12345678</a></li>
-                            <li><i class="icofont-envelope"></i> <a href="#">admin@sinmun.com</a></li>
-                            <li><i class="icofont-ui-browser"></i> <a href="#">www.sinmun.com</a></li>
+                            <li><i class="icofont-google-map"></i>{{ info.location }}</li>
+                            <li><i class="icofont-phone"></i> <a href="#">{{ info.number }}</a></li>
+                            <li><i class="icofont-envelope"></i> <a href="#">{{ info.email }}</a></li>
+                            <li><i class="icofont-ui-browser"></i> <a href="#">{{ info.site }}</a></li>
                         </ul>
                     </div>
                 </div>
