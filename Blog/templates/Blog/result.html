@@ -1,0 +1,202 @@
+﻿{% load static %}
+<!doctype html>
+<html lang="fa">
+    
+
+<head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="keywords" content="HTML5,CSS3,HTML,Template,multi-page,Sinmun - News and Magazine HTML Template" >
+        <meta name="description" content="Sinmun - News and Magazine HTML Template">
+        <meta name="author" content="Barat Hadian">
+
+        <!-- Bootstrap Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+        <!-- Animate Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+        <!-- IcoFont Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/icofont.min.css' %}">
+        <!-- MeanMenu CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}">
+        <!-- Owl Carousel Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+        <!-- Magnific Popup Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.css' %}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        <!-- RTL CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/rtl.css' %}">
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+
+        <title>Sinmun - قالب HTML سینون , پوسته چندمنظوره سایت اخبار و مجله خبری</title>
+
+        <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
+    </head>
+
+    <body>
+        
+        <!-- Start Header Area -->
+        <header class="header-area">
+            <!-- Start Navbar Area -->
+            <div class="navbar-area">
+                <div class="sinmun-mobile-nav">
+                    <div class="logo">
+                        <a href="{% url 'blog:home' %}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
+                    </div>
+                </div>
+
+                <div class="sinmun-nav">
+                    <div class="container">
+                        <nav class="navbar navbar-expand-md navbar-light">
+                            <a class="navbar-brand" href="{% url 'blog:home' %}"><img src="{% static 'assets/img/logo.png' %}" alt="logo"></a>
+
+                            <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+                                <ul class="navbar-nav">
+                                    <li class="nav-item"><a href="{% url 'blog:home' %}" class="nav-link">صفحه اصلی</a>
+
+                                    </li>
+                                    
+                                    <li class="nav-item"><a href="{% url 'blog:cat_lifestyle' %}" class="nav-link">سبک زندگی</a></li>
+
+                                    <li class="nav-item"><a href="{% url 'blog:cat_tech' %}" class="nav-link">فناوری</a></li>
+
+                                    <li class="nav-item"><a href="{% url 'blog:cat_travel' %}" class="nav-link">مسافرت</a></li>
+
+                                    <li class="nav-item"><a href="{% url 'blog:contact' %}" class="nav-link active">تماس با ما</a>
+
+                                    </li>
+                                </ul>
+
+                                <div class="others-options">
+                                    <ul>
+                                        <li><a href="login.html"><i class="icofont-user-alt-5"></i></a></li>
+                                        <li class="header-search">
+                                            <div class="nav-search">
+                                                <div class="nav-search-button">
+                                                    <i class="icofont-ui-search"></i>
+                                                </div>
+                                                
+                                                <form>
+                                                    <span class="nav-search-close-button" tabindex="0">✕</span>
+                                                    <div class="nav-search-inner">
+                                                        <input type="text" name="search" placeholder="جستجو کنید ....">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <!-- End Navbar Area -->
+
+            <!-- Start Breaking News -->
+           {% include 'includes/breakingnews.html' %}
+            <!-- End Breaking News -->
+        </header>
+        <!-- End Header Area -->
+
+        <!-- Start Page Title Area -->
+        <div class="page-title-area">
+            <div class="container">
+                <div class="page-title-content">
+                    <h2>نتیجه ی جستوجو</h2>
+
+                    <ul>
+                        <li><a href="{% url 'blog:home' %}"><i class="icofont-home"></i> صفحه اصلی</a></li>
+                        <li><i class="icofont-rounded-left"></i></li>
+                        <li>نتیجه ی جستوجو</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- End Page Title Area -->
+
+        <!-- Start All Category News Area -->
+        <section class="all-category-news ptb-40 pt-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12">
+                        <div class="section-title">
+                            <h2>نتایج جستوجو</h2>
+                        </div>
+                        
+                        <div class="single-category-news">
+                            <div class="row m-0 align-items-center">
+                                <div class="col-lg-5 col-md-6 p-0">
+                                    <div class="category-news-image">
+                                        <a href="#"><img src="{% static 'assets/img/1.jpg' %}" alt="image"></a>
+
+                                        <div class="tags">
+                                            <a href="#">ورزش</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-7 col-md-6">
+                                    <div class="category-news-content">
+                                        <span><i class="icofont-clock-time"></i> در 10 دقیقه پیش</span>
+                                        <h3><a href="#">لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد</a></h3>
+                                        <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pagination-area">
+                            <a href="#" class="prev page-numbers"><i class="icofont-double-right"></i></a>
+                            <a href="#" class="page-numbers">1</a>
+                            <span class="page-numbers current" aria-current="page">2</span>
+                            <a href="#" class="page-numbers">3</a>
+                            <a href="#" class="next page-numbers"><i class="icofont-double-left"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12">
+                            <div class="newsletter-box-inner">
+                                <h3>برای بروزرسانی های جدید در خبرنامه ما مشترک شوید!</h3>
+                                {% include 'includes/newsletter.html' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End All Category News Area -->
+
+        {% include 'includes/footer.html' %}
+        <!-- End Footer Area -->
+
+        <div class="go-top"><i class="icofont-swoosh-up"></i></div>
+        
+        <!-- Jquery Min JS -->
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <!-- Popper Min JS -->
+        <script src="{% static 'assets/js/popper.min.js' %}"></script>
+        <!-- Bootstrap Min JS -->
+        <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+        <!-- MeanMenu JS -->
+        <script src="{% static 'assets/js/jquery.meanmenu.js' %}"></script>
+        <!-- MixItUp Min JS -->
+        <script src="{% static 'assets/js/mixitup.min.js' %}"></script>
+        <!-- Owl Carousel Min JS -->
+        <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+        <!-- Magnific Popup Min JS -->
+        <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+        <!-- Form Validator Min JS -->
+        <script src="{% static 'assets/js/form-validator.min.js' %}"></script>
+        <!-- Contact Form Script JS -->
+        <script src="{% static 'assets/js/contact-form-script.js' %}"></script>
+        <!-- ajaxChimp Min JS -->
+        <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
+        <!-- Main JS -->
+        <script src="{% static 'assets/js/main.js' %}"></script>
+    </body>
+
+
+</html>

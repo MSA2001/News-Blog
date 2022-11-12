@@ -37,6 +37,10 @@ def detail(request, id):
     return render(request, 'Blog/detail.html', {'article': article})
 
 
+def search(request):
+    return render(request,'Blog/result.html')
+
+
 def cat_lifestyle(request):
     article_lifestyle = Article.objects.filter(category=1)
 
