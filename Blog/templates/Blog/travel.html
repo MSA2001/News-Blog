@@ -84,7 +84,8 @@
                                             </div>
                                             {% else %}
 
-                                    <li><a href="{% url 'blog:signin' %}"> ورود/ثبت نام <i class="icofont-user-alt-5"></i></a></li>
+                                    <li><a href="{% url 'blog:signin' %}"> ورود/ثبت نام <i
+                                            class="icofont-user-alt-5"></i></a></li>
                                     <li class="header-search">
                                     <div class="nav-search">
                                     <div class="nav-search-button">
@@ -105,8 +106,8 @@
                         </div>
                 </nav>
             </div>
-            </div>
         </div>
+    </div>
     </div>
     <!-- End Navbar Area -->
 
@@ -135,25 +136,26 @@
     <div class="container">
         <div class="row">
             <div class="default-news-slides owl-carousel owl-theme">
-                {% for article in articles %}
-                <div class="col-lg-12 col-md-12">
-                    <div class="single-default-news">
-                        <a href="{% url 'blog:posts'  article.id   %}">
-                        <img src="{{ article.image.url }}" alt="image" height="300px" width="500px">
-                        </a>
-                        <div class="news-content">
-                            <ul>
-                                <li><i class="icofont-user-suited"></i> توسط <a href="#">{{ article.author.username }}</a></li>
-                                <li><i class="icofont-calendar"></i>{{ article.created }}</li>
-                            </ul>
-                            <h3><a href="{% url 'blog:posts'  article.id   %}">{{ article.title }}</a></h3>
-                        </div>
+                {% for new in news %}
+                    <div class="col-lg-12 col-md-12">
+                        <div class="single-default-news">
+                            <a href="{% url 'blog:posts'  new.id %}">
+                                <img src="{{ new.image.url }}" alt="image" height="300px" width="500px">
+                            </a>
+                            <div class="news-content">
+                                <ul>
+                                    <li><i class="icofont-user-suited"></i> توسط <a
+                                            href="#">{{ new.author.username }}</a></li>
+                                    <li><i class="icofont-calendar"></i>{{ new.created }}</li>
+                                </ul>
+                                <h3><a href="{% url 'blog:posts'  new.id %}">{{ new.title }}</a></h3>
+                            </div>
 
-                        <div class="tags">
-                            <a href="{% url 'blog:cat_travel' %}">{{ article.category.all.first }}</a>
+                            <div class="tags">
+                                <a href="{% url 'blog:cat_travel' %}">{{ new.category.all.first }}</a>
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
         </div>
@@ -170,36 +172,49 @@
                     <h2>همه اخبار</h2>
                 </div>
 
-                 {% for article in articles %}
-                <div class="single-category-news">
-                    <div class="row m-0 align-items-center">
-                        <div class="col-lg-5 col-md-6 p-0">
-                            <div class="category-news-image">
-                                <a href="{% url 'blog:posts'  article.id   %}"><img src="{{ article.image.url }}" alt="image"></a>
+                {% for article in articles %}
+                    <div class="single-category-news">
+                        <div class="row m-0 align-items-center">
+                            <div class="col-lg-5 col-md-6 p-0">
+                                <div class="category-news-image">
+                                    <a href="{% url 'blog:posts'  article.id %}"><img src="{{ article.image.url }}"
+                                                                                      alt="image"></a>
 
-                                <div class="tags">
-                                    <a href="{% url 'blog:cat_travel' %}">{{ article.category.all.first }}</a>
+                                    <div class="tags">
+                                        <a href="{% url 'blog:cat_travel' %}">{{ article.category.all.first }}</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-7 col-md-6">
+                                <div class="category-news-content">
+                                    <span><i class="icofont-clock-time"></i>{{ article.created }}</span>
+                                    <h3><a href="{% url 'blog:posts'  article.id %}">{{ article.title }}</a></h3>
+                                    <p>{{ article.body|truncatewords:30 }}</p>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="col-lg-7 col-md-6">
-                            <div class="category-news-content">
-                                <span><i class="icofont-clock-time"></i>{{ article.created }}</span>
-                                <h3><a href="{% url 'blog:posts'  article.id   %}">{{ article.title }}</a></h3>
-                                <p>{{ article.body|truncatewords:30  }}</p>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
 
                 <div class="pagination-area">
-                    <a href="#" class="prev page-numbers"><i class="icofont-double-right"></i></a>
-                    <a href="#" class="page-numbers">1</a>
-                    <span class="page-numbers current" aria-current="page">2</span>
-                    <a href="#" class="page-numbers">3</a>
-                    <a href="#" class="next page-numbers"><i class="icofont-double-left"></i></a>
+                    {% if articles.has_other_pages %}
+                        {% if articles.has_previous %}
+                            <a href="?page={{ articles.previous_page_number }}" class="prev page-numbers"><i
+                                    class="icofont-double-right"></i></a>
+                        {% endif %}
+                        {% for i in articles.paginator.page_range %}
+                            {% if articles.number == i %}
+                                <a href="?page={{ i }}" class="page-numbers current">{{ i }}</a>
+                            {% else %}
+                                <a href="?page={{ i }}" class="page-numbers">{{ i }}</a>
+                            {% endif %}
+                        {% endfor %}
+                        {% if articles.has_next %}
+                            <a href="?page={{ articles.next_page_number }}" class="next page-numbers"> <i
+                                    class="icofont-double-left"></i></a>
+                        {% endif %}
+                    {% endif %}
                 </div>
             </div>
 
@@ -210,7 +225,7 @@
                         <h2>خبرنامه</h2>
                     </div>
 
-                     {% include 'includes/newsletter.html' %}
+                    {% include 'includes/newsletter.html' %}
                 </div>
 
             </div>
