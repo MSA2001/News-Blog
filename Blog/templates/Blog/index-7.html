@@ -89,7 +89,7 @@
                                 </div>
                             {% endif %}
 
-                                <form>
+                                <form action="{% url 'blog:search' %}" >
                                     <span class="nav-search-close-button" tabindex="0">✕</span>
                                     <div class="nav-search-inner">
                                         <input type="text" name="q" placeholder="جستجو کنید ....">
@@ -184,22 +184,7 @@
 
 
                 <div class="pagination-area">
-                    {% if articles.has_other_pages %}
-                        {% if articles.has_previous %}
-                            <a href="?page={{ articles.previous_page_number }}" class="prev page-numbers"><i
-                                    class="icofont-double-right"></i></a>
-                        {% endif %}
-                        {% for i in articles.paginator.page_range %}
-                            {% if articles.number == i %}
-                                <a href="?page={{ i }}" class="page-numbers current">{{ i }}</a>
-                            {% else %}
-                                <a href="?page={{ i }}" class="page-numbers">{{ i }}</a>
-                            {% endif %}
-                        {% endfor %}
-                        {% if articles.has_next %}
-                        <a href="?page={{ articles.next_page_number }}" class="next page-numbers"> <i class="icofont-double-left"></i></a>
-                            {% endif %}
-                    {% endif %}
+                   {% include 'includes/pagination.html' %}
                 </div>
             </div>
 

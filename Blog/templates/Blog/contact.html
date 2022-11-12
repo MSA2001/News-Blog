@@ -95,10 +95,10 @@
                                         <i class="icofont-ui-search"></i>
                                     </div>
                                 {% endif %}
-                                    <form>
+                                    <form action="{% url 'blog:search' %}">
                                         <span class="nav-search-close-button" tabindex="0">✕</span>
                                         <div class="nav-search-inner">
-                                            <input type="text" name="search" placeholder="جستجو کنید ....">
+                                            <input type="text" name="q" placeholder="جستجو کنید ....">
                                         </div>
                                     </form>
                                     </div>
