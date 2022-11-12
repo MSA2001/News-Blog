@@ -1,20 +1,25 @@
 from django.contrib.auth import authenticate, login, logout
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Article, Category, Message, Newsletter
 
 
+
 # Create your views here.
 
 
+
 def home(request):
-    articles = Article.objects.all().order_by('?')
+    articles = Article.objects.all().order_by('-updated')
     recent = Article.objects.all().order_by('-updated')
     cat = Category.objects.all()
     for article in articles:
         category = article.category.all()
-
+    paginator = Paginator(articles, 3)
+    page_number = request.GET.get('page')
+    object_list = paginator.get_page(page_number)
     if request.method == 'POST':
         email = request.POST.get('email')
         if Newsletter.objects.filter(email=email).exists():
@@ -24,7 +29,7 @@ def home(request):
             Newsletter.objects.create(email=email)
             messages.success(request, 'عضویت شما تایید شد')
             return redirect('blog:home')
-    return render(request, 'Blog/index-7.html', {'articles': articles, 'recent_article': recent, 'category': category, 'cat': cat})
+    return render(request, 'Blog/index-7.html', {'articles': object_list, 'recent_article': recent, 'category': category, 'cat': cat, 'news': articles})
 
 
 def detail(request, id):
@@ -34,6 +39,10 @@ def detail(request, id):
 
 def cat_lifestyle(request):
     article_lifestyle = Article.objects.filter(category=1)
+
+    paginator = Paginator(article_lifestyle, 3)
+    page_number = request.GET.get('page')
+    object_list = paginator.get_page(page_number)
     if request.method == 'POST':
         email = request.POST.get('email')
         if Newsletter.objects.filter(email=email).exists():
@@ -43,11 +52,14 @@ def cat_lifestyle(request):
             Newsletter.objects.create(email=email)
             messages.success(request, 'عضویت شما تایید شد')
             return redirect('blog:home')
-    return render(request, 'Blog/lifestyle.html', {'articles': article_lifestyle})
+    return render(request, 'Blog/lifestyle.html', {'articles': object_list, 'news': article_lifestyle})
 
 
 def cat_tech(request):
     article_technology = Article.objects.filter(category=2)
+    paginator = Paginator(article_technology, 3)
+    page_number = request.GET.get('page')
+    object_list = paginator.get_page(page_number)
     if request.method == 'POST':
         email = request.POST.get('email')
         if Newsletter.objects.filter(email=email).exists():
@@ -57,12 +69,15 @@ def cat_tech(request):
             Newsletter.objects.create(email=email)
             messages.success(request, 'عضویت شما تایید شد')
             return redirect('blog:home')
-    return render(request, 'Blog/tech.html', {'articles': article_technology})
+    return render(request, 'Blog/tech.html', {'articles': object_list, 'news': article_technology})
 
 
 def cat_travel(request):
     article_travel = Article.objects.filter(category=3)
-    if request.method =='POST':
+    paginator = Paginator(article_travel, 3)
+    page_number = request.GET.get('page')
+    object_list = paginator.get_page(page_number)
+    if request.method == 'POST':
         email = request.POST.get('email')
         if Newsletter.objects.filter(email=email).exists():
             messages.error(request, 'شما قبلا عضو شده اید')
@@ -71,7 +86,7 @@ def cat_travel(request):
             Newsletter.objects.create(email=email)
             messages.success(request, 'عضویت شما تایید شد')
             return redirect('blog:home')
-    return render(request, 'Blog/travel.html', {'articles': article_travel})
+    return render(request, 'Blog/travel.html', {'articles': object_list, 'news': article_travel})
 
 
 def contact(request):
