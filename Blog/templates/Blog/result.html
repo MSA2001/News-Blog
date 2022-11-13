@@ -128,42 +128,63 @@
                 <div class="section-title">
                     <h2>نتایج جستوجو</h2>
                 </div>
-                {% for article in articles %}
-                    <div class="single-category-news">
-                        <div class="row m-0 align-items-center">
-                            <div class="col-lg-5 col-md-6 p-0">
-                                <div class="category-news-image">
-                                    <a href="{% url 'blog:posts' article.id %}"><img src="{{ article.image.url }}"
-                                                                                     alt="image"></a>
+                {% if articles %}
+                    {% for article in articles %}
+                        <div class="single-category-news">
+                            <div class="row m-0 align-items-center">
+                                <div class="col-lg-5 col-md-6 p-0">
+                                    <div class="category-news-image">
+                                        <a href="{% url 'blog:posts' article.id %}"><img src="{{ article.image.url }}"
+                                                                                         alt="image"></a>
 
-                                    <div class="tags">
-                                        <a href="#">{{ article.category.all.first }}</a>
+                                        <div class="tags">
+                                            <a href="#">{{ article.category.all.first }}</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-7 col-md-6">
+                                    <div class="category-news-content">
+                                        <span><i class="icofont-clock-time"></i>{{ article.created }}</span>
+                                        <h3><a href="{% url 'blog:posts' article.id %}">{{ article.title }}</a></h3>
+                                        <p>{{ article.body|truncatewords:30 }}</p>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="col-lg-7 col-md-6">
-                                <div class="category-news-content">
-                                    <span><i class="icofont-clock-time"></i>{{ article.created }}</span>
-                                    <h3><a href="{% url 'blog:posts' article.id %}">{{ article.title }}</a></h3>
-                                    <p>{{ article.body|truncatewords:30 }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <section class="error-area">
+                        <div class="d-table">
+                            <div class="d-table-cell">
+                                <div class="container">
+                                    <div class="error-content">
+                                        <div class="notfound-404">
+                                            <h1>متاسفیم!</h1>
+                                        </div>
+                                        <h3>404 - صفحه وجود ندارد</h3>
+                                        <p>ممکن است صفحه مورد نظر حذف شده باشد ، نام آن را تغییر داده یا ممکن است موقتاً
+                                            در دسترس نباشد..</p>
+                                        <a href="{% url 'blog:home' %}" class="btn btn-primary">بازگشت به صفحه اصلی</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    </section>
+                {% endif %}
 
                 <div class="pagination-area">
                     {% include 'includes/pagination.html' %}
                 </div>
             </div>
-
-            <div class="col-lg-4 col-md-12">
-                <div class="newsletter-box-inner">
-                    <h3>برای بروزرسانی های جدید در خبرنامه ما مشترک شوید!</h3>
-                    {% include 'includes/newsletter.html' %}
+            {% if articles %}
+                <div class="col-lg-4 col-md-12">
+                    <div class="newsletter-box-inner">
+                        <h3>برای بروزرسانی های جدید در خبرنامه ما مشترک شوید!</h3>
+                        {% include 'includes/newsletter.html' %}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
         </div>
     </div>
     </div>
