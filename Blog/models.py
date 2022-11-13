@@ -28,6 +28,17 @@ class Article(models.Model):
         return self.title
 
 
+class Comment(models.Model):
+    article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comments')
+    parent = models.ForeignKey('self', null=True, blank=True, on_delete=models.CASCADE, related_name='replies')
+    body = models.TextField(max_length=500)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{ self.author.username } - { self.article.title[:10] }"
+
+
 class Message(models.Model):
     name = models.CharField(max_length=30)
     email = models.EmailField(max_length=50)
