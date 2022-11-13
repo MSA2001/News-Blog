@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Blog.apps.BlogConfig',
     'django_render_partial',
+    'django_cleanup.apps.CleanupConfig'
 
 ]
 
