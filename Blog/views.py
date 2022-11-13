@@ -3,12 +3,10 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Article, Category, Message, Newsletter, Info
-
+from .models import Article, Category, Message, Newsletter, Info, Comment
 
 
 # Create your views here.
-
 
 
 def home(request):
@@ -29,11 +27,19 @@ def home(request):
             Newsletter.objects.create(email=email)
             messages.success(request, 'عضویت شما تایید شد')
             return redirect('blog:home')
-    return render(request, 'Blog/index-7.html', {'articles': object_list, 'recent_article': recent, 'category': category, 'cat': cat, 'news': articles})
+    return render(request, 'Blog/index-7.html',
+                  {'articles': object_list, 'recent_article': recent, 'category': category, 'cat': cat,
+                   'news': articles})
 
 
 def detail(request, id):
     article = Article.objects.get(id=id)
+    if request.method == 'POST':
+        body = request.POST.get('body')
+        parent_id = request.POST.get('parent_id')
+        Comment.objects.create(author=request.user, article=article , body=body, parent_id=parent_id)
+        print('hi')
+        return redirect('blog:posts', id=id)
     return render(request, 'Blog/detail.html', {'article': article})
 
 
@@ -43,7 +49,8 @@ def search(request):
     page_number = request.GET.get('page')
     paginator = Paginator(articles, 2)
     object_list = paginator.get_page(page_number)
-    return render(request,'Blog/result.html', {'articles': object_list})
+
+    return render(request, 'Blog/result.html', {'articles': object_list})
 
 
 def cat_lifestyle(request):
@@ -108,7 +115,7 @@ def contact(request):
         Message.objects.create(name=name, email=email, title=title, body=body)
         messages.success(request, 'پیام شما با موفقیت ارسال شد')
         return render(request, 'Blog/contact.html')
-    return render(request, 'Blog/contact.html',{'info': info})
+    return render(request, 'Blog/contact.html', {'info': info})
 
 
 def signin(request):

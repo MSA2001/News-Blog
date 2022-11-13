@@ -106,7 +106,7 @@
         <ul class="breadcrumb">
             <li><a href="{% url 'blog:home' %}"><i class="icofont-home"></i> صفحه اصلی</a></li>
             <li><i class="icofont-rounded-left"></i></li>
-            <li><a href="{% url 'blog:cat_tech' %}">تکنولوژی</a></li>
+            <li>{{ article.category.all.first }}</li>
             <li><i class="icofont-rounded-left"></i></li>
             <li>{{ article.title }}</li>
         </ul>
@@ -116,7 +116,7 @@
                 <div class="news-details">
                     <div class="article-content">
                         <ul class="entry-meta">
-                            <li><i class="icofont-user"></i> <a href="#">{{ article.author.username }}</a></li>
+                            <li><i class="icofont-user"></i> <a href="#">  {{ article.author.username }}  </a></li>
                             <li><i class="icofont-calendar"></i>{{ article.created }}</li>
                         </ul>
 
@@ -233,39 +233,22 @@
 
                     <div class="comment-respond">
                         <h3 class="comment-reply-title">نظر بدهید</h3>
-
-                        <form class="comment-form">
-                            <p class="comment-notes">
-                                <span id="email-notes">آدرس ایمیل شما منتشر نخواهد شد.</span>
-                                <span class="required">*</span>
-                            </p>
+                         {% if request.user.is_authenticated %}
+                        <form method="post">
+                            {% csrf_token %}
                             <p class="comment-form-comment">
-                                <label for="comment">نظر شما </label>
-                                <textarea name="comment" id="comment" cols="45" rows="5" maxlength="65525"
+                                <input type="hidden" name="parent_id" id="parent_id" value=""  >
+                                <label for="comment">نظر شما
+                                <textarea name="body" id="comment" cols="45" rows="5" maxlength="65525"
                                           required="required"></textarea>
-                            </p>
-                            <p class="comment-form-author">
-                                <label for="name">نام شما <span class="required">*</span></label>
-                                <input type="text" id="author" name="author" required="required">
-                            </p>
-                            <p class="comment-form-email">
-                                <label for="email">ایمیل شما <span class="required">*</span></label>
-                                <input type="email" id="email" name="email" required="required">
-                            </p>
-                            <p class="comment-form-url">
-                                <label for="url">وبسایت</label>
-                                <input type="url" id="url" name="url">
-                            </p>
-                            <p class="comment-form-cookies-consent">
-                                <input type="checkbox" value="yes" name="wp-comment-cookies-consent"
-                                       id="wp-comment-cookies-consent">
-                                <label for="wp-comment-cookies-consent">اولین بار در مورد این نظر ، نام ، ایمیل و وب
-                                    سایت خود را در این مرورگر ذخیره کنید.</label>
                             </p>
                             <p class="form-submit">
                                 <input type="submit" name="submit" id="submit" class="submit" value="ارسال">
                             </p>
                         </form>
+                        {% else %}
+                        <a class="btn btn-dark" href="{% url 'blog:signin' %}"> لطفا برای ثبت نظر ابتدا وارد شوید</a>
+                                    {% endif %}
                     </div>
                 </div>
             </div>
