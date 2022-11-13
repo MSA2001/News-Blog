@@ -147,7 +147,7 @@
                         <div class="d-flex flex-wrap">
                             <div class="posts-thumb align-self-stretch">
                                 <a href="{% url 'blog:posts'  article.id %}">
-                                    <img src="{{ article.image.url }}" width="100%" height="100%">
+                                    <img src="{{ article.image.url }}" width="100%" height="100%" alt="">
                                 </a>
                             </div>
 
@@ -197,7 +197,7 @@
                         {% for article in recent_article|slice:":5" %}
                             <article>
                                 <a href="{% url 'blog:posts'  article.id %}" class="thumb">
-                                    <img src="{{ article.image.url }}" height="70px" width="70px">
+                                    <img src="{{ article.image.url }}" height="70px" width="70px" alt="">
                                 </a>
 
                                 <div class="info">
