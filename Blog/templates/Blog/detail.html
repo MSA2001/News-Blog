@@ -137,7 +137,7 @@
                 </div>
 
                 <div class="comments-area">
-                    <h3 class="comments-title">2 نظر:</h3>
+                    <h3 class="comments-title">{{ article.comments.count }} نظر:</h3>
 
                     <ol class="comment-list">
                         {% for comment in  article.comments.all %}
