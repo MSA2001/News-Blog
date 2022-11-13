@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .models import Article, Category, Message, Newsletter, Info, Comment
+from .models import Article, Category, Message, Newsletter, Info, Comment, Profile
 
 
 # Create your views here.
@@ -37,7 +37,7 @@ def detail(request, id):
     if request.method == 'POST':
         body = request.POST.get('body')
         parent_id = request.POST.get('parent_id')
-        Comment.objects.create(author=request.user, article=article , body=body, parent_id=parent_id)
+        Comment.objects.create(user=request.user, article=article , body=body, parent_id=parent_id)
         print('hi')
         return redirect('blog:posts', id=id)
     return render(request, 'Blog/detail.html', {'article': article})

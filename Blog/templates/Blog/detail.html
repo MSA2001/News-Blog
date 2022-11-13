@@ -144,80 +144,95 @@
                     <ol class="comment-list">
                         {% for comment in  article.comments.all %}
                             {% if comment.parent == None %}
-                        <li class="comment">
-                            <article class="comment-body">
-                                <footer class="comment-meta">
-                                    <div class="comment-author vcard">
-                                        <img src="{% static 'assets/img/noprofile.jpg' %}" class="avatar" alt="image">
-                                        <b class="fn">{{ comment.author.username }}</b>
-                                        <span class="says">می گوید:</span>
-                                    </div>
-
-                                    <div class="comment-metadata">
-                                        <a href="#">
-                                            <time>{{ comment.created }}</time>
-                                        </a>
-                                    </div>
-                                </footer>
-
-                                <div class="comment-content">
-                                    <p>{{ comment.body }}</p>
-                                </div>
-
-                                <div class="reply">
-                                    <a href="#" class="comment-reply-link" onclick="set_value({{ comment.id }})">پاسخ دادن </a>
-                                </div>
-                            </article>
-                            {% for reply in comment.replies.all %}
-                            <ol class="children">
                                 <li class="comment">
                                     <article class="comment-body">
                                         <footer class="comment-meta">
                                             <div class="comment-author vcard">
-                                                <img src="{% static 'assets/img/noprofile.jpg' %}" class="avatar"
-                                                     alt="image">
-                                                <b class="fn">{{ reply.author.username }}</b>
+                                                {% if comment.user.profile.image %}
+                                                    <img src="{{ comment.user.profile.image.url }}" class="avatar"
+                                                         alt="image">
+                                                {% else %}
+                                                    <img src="{% static 'assets/img/noprofile.jpg' %}" class="avatar"
+                                                         alt="image">
+                                                {% endif %}
+                                                <b class="fn">{{ comment.user.username }}</b>
                                                 <span class="says">می گوید:</span>
                                             </div>
 
                                             <div class="comment-metadata">
                                                 <a href="#">
-                                                    <time>{{ author.created }}</time>
+                                                    <time>{{ comment.created }}</time>
                                                 </a>
                                             </div>
                                         </footer>
 
                                         <div class="comment-content">
-                                            <p>{{ reply.body }}</p>
+                                            <p>{{ comment.body }}</p>
                                         </div>
 
+                                        <div class="reply">
+                                            <a href="#" class="comment-reply-link"
+                                               onclick="set_value({{ comment.id }})">پاسخ دادن </a>
+                                        </div>
                                     </article>
-                                </li>
-                            </ol>
-                        </li>
-                                {% endfor %}
+                                    {% for reply in comment.replies.all %}
+                                        <ol class="children">
+                                            <li class="comment">
+                                                <article class="comment-body">
+                                                    <footer class="comment-meta">
+                                                        <div class="comment-author vcard">
+                                                            {% if reply.user.profile.image %}
+                                                                <img src="{{ reply.user.profile.image.url }}"
+                                                                     class="avatar"
+                                                                     alt="image">
+                                                            {% else %}
+                                                                <img src="{% static 'assets/img/noprofile.jpg' %}"
+                                                                     class="avatar"
+                                                                     alt="image">
+                                                            {% endif %}
+                                                            <b class="fn">{{ reply.user.username }}</b>
+                                                            <span class="says">می گوید:</span>
+                                                        </div>
+
+                                                        <div class="comment-metadata">
+                                                            <a href="#">
+                                                                <time>{{ reply.created }}</time>
+                                                            </a>
+                                                        </div>
+                                                    </footer>
+
+                                                    <div class="comment-content">
+                                                        <p>{{ reply.body }}</p>
+                                                    </div>
+
+                                                </article>
+                                            </li>
+                                        </ol>
+                                        </li>
+                                    {% endfor %}
                             {% endif %}
                         {% endfor %}
                     </ol>
 
                     <div class="comment-respond">
-                        <h3 class="comment-reply-title" >نظر بدهید</h3>
-                         {% if request.user.is_authenticated %}
-                        <form method="post">
-                            {% csrf_token %}
-                            <p class="comment-form-comment">
-                                <input type="hidden" name="parent_id" id="parent_id" value="">
-                                <label for="comment">نظر شما
-                                <textarea name="body" id="D" cols="45" rows="5" maxlength="65525"
-                                          required="required"></textarea>
-                            </p>
-                            <p class="form-submit"  >
-                                <input type="submit" name="submit" id="submit" class="submit" value="ارسال">
-                            </p>
-                        </form>
+                        <h3 class="comment-reply-title">نظر بدهید</h3>
+                        {% if request.user.is_authenticated %}
+                            <form method="post">
+                                {% csrf_token %}
+                                <p class="comment-form-comment">
+                                    <input type="hidden" name="parent_id" id="parent_id" value="">
+                                    <label for="comment">نظر شما
+                                        <textarea name="body" id="D" cols="45" rows="5" maxlength="65525"
+                                                  required="required"></textarea>
+                                </p>
+                                <p class="form-submit">
+                                    <input type="submit" name="submit" id="submit" class="submit" value="ارسال">
+                                </p>
+                            </form>
                         {% else %}
-                        <a class="btn btn-dark" href="{% url 'blog:signin' %}"> لطفا برای ثبت نظر ابتدا وارد شوید</a>
-                                    {% endif %}
+                            <a class="btn btn-dark" href="{% url 'blog:signin' %}"> لطفا برای ثبت نظر ابتدا وارد
+                                شوید</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -232,7 +247,7 @@
 <div class="go-top"><i class="icofont-swoosh-up"></i></div>
 
 <script>
-    function set_value(id){
+    function set_value(id) {
         document.getElementById('parent_id').value = id;
         window.location.href = "#D"
     }
