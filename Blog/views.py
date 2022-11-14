@@ -11,6 +11,7 @@ from .models import Article, Category, Message, Newsletter, Info, Comment, Profi
 
 def home(request):
     articles = Article.objects.all().order_by('-updated')
+    news = Article.objects.all().order_by('?')
     recent = Article.objects.all().order_by('-updated')
     cat = Category.objects.all()
     for article in articles:
@@ -29,7 +30,7 @@ def home(request):
             return redirect('blog:home')
     return render(request, 'Blog/index-7.html',
                   {'articles': object_list, 'recent_article': recent, 'category': category, 'cat': cat,
-                   'news': articles})
+                   'news': news})
 
 
 def detail(request, id):
