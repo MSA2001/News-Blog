@@ -1,0 +1,84 @@
+﻿{% load static %}
+<!doctype html>
+<html lang="fa">
+    
+<head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="keywords" content="HTML5,CSS3,HTML,Template,multi-page,Sinmun - News and Magazine HTML Template" >
+        <meta name="description" content="Sinmun - News and Magazine HTML Template">
+        <meta name="author" content="Barat Hadian">
+
+        <!-- Bootstrap Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
+        <!-- Animate Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/animate.min.css' %}">
+        <!-- IcoFont Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/icofont.min.css' %}">
+        <!-- MeanMenu CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/meanmenu.css' %}">
+        <!-- Owl Carousel Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.min.css' %}">
+        <!-- Magnific Popup Min CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.min.cssassets/css/magnific-popup.min.css' %}">
+        <!-- Style CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        <!-- RTL CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/rtl.css' %}">
+        <!-- Responsive CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}">
+
+        <title>Sinmun - قالب HTML سینون , پوسته چندمنظوره سایت اخبار و مجله خبری</title>
+
+        <link rel="icon" type="image/png" href="{% static  'assets/img/' %}">
+    </head>
+
+    <body>
+
+        <!-- Start 404 Error Area -->
+        <section class="error-area">
+            <div class="d-table">
+                <div class="d-table-cell">
+                    <div class="container">
+                        <div class="error-content">
+                            <div class="notfound-404">
+                                <h1>متاسفیم!</h1>
+                            </div>
+                            <h3>404 - صفحه وجود ندارد</h3>
+                            <p>ممکن است صفحه مورد نظر حذف شده باشد ، نام آن را تغییر داده یا ممکن است موقتاً در دسترس نباشد..</p>
+                            <a href="{% url 'blog:home' %}" class="btn btn-primary">بازگشت به صفحه اصلی</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {% include 'includes/footer.html' %}
+        <!-- End 404 Error Area -->
+        
+        <!-- Jquery Min JS -->
+        <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+        <!-- Popper Min JS -->
+        <script src="{% static 'assets/js/popper.min.js' %}"></script>
+        <!-- Bootstrap Min JS -->
+        <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+        <!-- MeanMenu JS -->
+        <script src="{% static 'assets/js/jquery.meanmenu.js' %}"></script>
+        <!-- MixItUp Min JS -->
+        <script src="{% static 'assets/js/mixitup.min.js' %}"></script>
+        <!-- Owl Carousel Min JS -->
+        <script src="{% static 'assets/js/owl.carousel.min.js' %}"></script>
+        <!-- Magnific Popup Min JS -->
+        <script src="{% static 'assets/js/jquery.magnific-popup.min.js' %}"></script>
+        <!-- Form Validator Min JS -->
+        <script src="{% static 'assets/js/form-validator.min.js' %}"></script>
+        <!-- Contact Form Script JS -->
+        <script src="{% static 'assets/js/contact-form-script.js' %}"></script>
+        <!-- ajaxChimp Min JS -->
+        <script src="{% static 'assets/js/jquery.ajaxchimp.min.js' %}"></script>
+        <!-- Main JS -->
+        <script src="{% static 'assets/js/main.js' %}"></script>
+    </body>
+
+</html>
